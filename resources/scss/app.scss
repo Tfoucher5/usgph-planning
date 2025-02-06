@@ -1,0 +1,41 @@
+$primary: #6dba08;
+$secondary:#464447;
+
+$fa-font-path: "../../webfonts";
+
+// CSS Bootstrap
+@import "~bootstrap/scss/bootstrap";
+
+// BX icons
+@import "~node_modules/boxicons/";
+
+// CSS Font Awesome
+@import "./fontawesome/scss/fontawesome.scss";
+@import "./fontawesome/scss/brands.scss";
+@import "./fontawesome/scss/duotone.scss";
+@import "./fontawesome/scss/light.scss";
+@import "./fontawesome/scss/solid.scss";
+@import "./fontawesome/scss/regular.scss";
+
+// Datatables Bootstrap 5
+// @import 'datatables-bs5';
+@import "gridjs/dist/theme/mermaid.css";
+
+// Select2
+@import "~node_modules/select2/dist/css/select2.min.css";
+@import "~node_modules/select2-bootstrap-5-theme/dist/select2-bootstrap-5-theme";
+@import 'select2';
+
+// Datetimepicker
+@import '@eonasdan/tempus-dominus/src/scss/tempus-dominus';
+
+// Menu
+@import 'menu';
+@import 'tooltip';
+
+// CSS custom
+@import 'calendar';
+@import 'datetimepicker';
+@import 'input';
+@import 'custom';
+@import 'header-calendrier';

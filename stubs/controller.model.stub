@@ -1,0 +1,223 @@
+<?php
+
+namespace App\Http\Controllers\module;
+
+use App\Http\Controllers\Controller;
+use {{ namespacedModel }};
+use {{ rootNamespace }}Http\Controllers\Controller;
+use App\Http\Requests\module\{{ model }}ModelRequest;
+use App\Http\Services\module\{{ model }}Service;
+use Carbon\Exceptions\InvalidFormatException;
+use Carbon\Exceptions\NotLocaleAwareException;
+use Illuminate\Contracts\Container\BindingResolutionException;
+use Illuminate\Contracts\View\View;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Response;
+use Illuminate\Routing\Redirector;
+use InvalidArgumentException;
+use Session;
+use Symfony\Component\Routing\Exception\RouteNotFoundException;
+use Symfony\Component\Translation\Exception\InvalidArgumentException as ExceptionInvalidArgumentException;
+
+class {{ class }} extends Controller
+{
+    /**
+     * @var {{ model }}Service
+     */
+    private $service;
+    private const ABILITY = '_ability_';
+    private const PATH_VIEWS = '_ability_';
+
+    /**
+     * Constructor
+     * @param   {{ model }}Service $service
+     */
+    public function __construct({{ model }}Service $service)
+    {
+        $this->middleware('auth');
+        $this->service = $service;
+        Session::put('level_menu_1', 'modules');
+        Session::put('level_menu_2', self::ABILITY);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return Response|RedirectResponse|View|void
+     */
+    public function index()
+    {
+        if ($this->can(self::ABILITY . '-retrieve')) {
+            return view(self::PATH_VIEWS . '.index');
+        }
+    }
+
+    /**
+     * @return View|Factory|null
+     * @throws BindingResolutionException
+     * @throws RouteNotFoundException
+     * @throws InvalidFormatException
+     * @throws NotLocaleAwareException
+     * @throws ExceptionInvalidArgumentException
+     * @throws InvalidArgumentException
+     */
+    public function create()
+    {
+        return $this->model(null, 'create');
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  {{ model }}ModelRequest  $request
+     * @return RedirectResponse|void
+     */
+    public function store({{ model }}ModelRequest $request)
+    {
+        if ($this->can(self::ABILITY . '-create')) {
+            $data = $request->all();
+
+            ${{ modelVariable }} = $this->service->store($data);
+            Session::put('ok', 'Création effectuée');
+
+            return redirect(self::PATH_VIEWS);
+        }
+    }
+
+    /**
+     * @param {{ model }} ${{ modelVariable }}
+     * @return View|Factory|null
+     * @throws BindingResolutionException
+     * @throws RouteNotFoundException
+     * @throws InvalidFormatException
+     * @throws NotLocaleAwareException
+     * @throws ExceptionInvalidArgumentException
+     * @throws InvalidArgumentException
+     */
+    public function show({{ model }} ${{ modelVariable }})
+    {
+        return $this->model(${{ modelVariable }}, 'retrieve');
+    }
+
+    /**
+     * @param {{ model }} ${{ modelVariable }}
+     * @return View|Factory|null
+     * @throws BindingResolutionException
+     * @throws RouteNotFoundException
+     * @throws InvalidFormatException
+     * @throws NotLocaleAwareException
+     * @throws ExceptionInvalidArgumentException
+     * @throws InvalidArgumentException
+     */
+    public function edit({{ model }} ${{ modelVariable }})
+    {
+        return $this->model(${{ modelVariable }}, 'update');
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  {{ model }}ModelRequest  $request
+     * @param  {{ model }} ${{ modelVariable }}
+     * @return RedirectResponse|void
+     */
+    public function update({{ model }}ModelRequest $request, {{ model }} ${{ modelVariable }})
+    {
+        if ($this->can(self::ABILITY . '-update')) {
+            $this->service->update(${{ modelVariable }}, $request->all());
+            Session::put('ok', 'Mise à jour effectuée');
+
+            return redirect(route(self::PATH_VIEWS . '.index'));
+        }
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  {{ model }} ${{ modelVariable }}
+     * @return RedirectResponse|void
+     */
+    public function destroy({{ model }} ${{ modelVariable }})
+    {
+        if ($this->can(self::ABILITY . '-delete')) {
+            $this->service->destroy(${{ modelVariable }});
+            Session::put('ok', 'Suppression effectuée');
+
+            return redirect(route(self::PATH_VIEWS . '.index'));
+        }
+    }
+
+    /**
+     * Restaure un �l�ment supprim�
+     *
+     * @example Penser � utiliser un bind dans le web.php
+     *          Route::bind('{{ modelVariable }}_id', function (${{ modelVariable }}_id) {
+     *              return {{ model }}::onlyTrashed()->find(${{ modelVariable }}_id);
+     *          });
+     * @param  {{ model }} ${{ modelVariable }}
+     * @return RedirectResponse|void
+     */
+    public function undelete({{ model }} ${{ modelVariable }})
+    {
+        if ($this->can(self::ABILITY . '-delete')) {
+            $this->service->undelete(${{ modelVariable }});
+            Session::put('ok', 'Restauration effectuée');
+
+            return redirect(route(self::PATH_VIEWS . '.index'));
+        }
+    }
+
+    /**
+     * Renvoie la liste des {{ model }} au format JSON pour leur gestion
+     * @return string|false|void � a JSON encoded string on success or FALSE on failure
+     */
+    public function json()
+    {
+        if ($this->can(self::ABILITY . '-retrieve')) {
+            return $this->service->json();
+        }
+    }
+
+    /**
+     * Rempli un tableau avec les données nécessaires aux vues
+     *
+     * @param {{ model }} ${{ modelVariable }}|null
+     * @param string $ability
+     *
+     * @return array<string, mixed>
+     *
+     * @throws InvalidArgumentException
+     */
+    private function data(?{{ model }} ${{ modelVariable }}, string $ability): array
+    {
+        return [
+            '{{ modelVariable }}' => ${{ modelVariable }},
+            // variables � ajouter
+            'disabled' => $ability === 'retrieve'
+        ];
+    }
+
+    /**
+     * @param {{ model }} ${{ modelVariable }}|null
+     * @param string $ability
+     * @return View|Factory|null
+     * @throws BindingResolutionException
+     * @throws RouteNotFoundException
+     * @throws InvalidFormatException
+     * @throws NotLocaleAwareException
+     * @throws ExceptionInvalidArgumentException
+     * @throws InvalidArgumentException
+     */
+    private function model(?{{ model }} ${{ modelVariable }}, string $ability)
+    {
+        if ($this->can(self::ABILITY . '-' . $ability)) {
+            return view(
+                self::PATH_VIEWS . '.model',
+                $this->data(${{ modelVariable }}, $ability)
+            );
+        }
+
+        return null;
+    }
+}

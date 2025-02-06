@@ -1,0 +1,40 @@
+.ts-control>input {
+    padding-top: 16px !important;
+}
+
+.ts-control .item {
+    padding-top: 16px;
+}
+
+.tom-select-custom {
+    border: 0;
+    border-radius: 0px;
+}
+
+.tom-select-custom input {
+    text-align: center;
+    padding: 0 !important;
+}
+
+.tom-select-custom.focus .ts-control {
+    box-shadow: unset;
+    max-height: 56px;
+}
+
+.tom-select-custom div.option {
+    text-align: left;
+}
+
+.tom-select-custom .ts-control .item,
+.tom-select-custom.focus .ts-control .item {
+    height: 22px;
+    overflow: hidden;
+    padding: 0px 32px 0px 0px;
+    margin: 0px;
+    display: flex;
+    align-items: start;
+}
+
+.tom-select-custom input:focus-visible {
+    outline: unset;
+}

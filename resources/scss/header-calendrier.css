@@ -1,0 +1,55 @@
+.text-center {
+    margin-bottom: 20px;
+}
+
+/* Espacement entre les boutons du calendrier */
+.fc-toolbar {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+    padding: 10px;
+}
+
+/* Espacer les boutons et réduire leur taille sur mobile */
+.fc-toolbar button {
+    font-size: 14px;
+    padding: 6px 12px;
+    margin: 0 5px;
+    min-width: 40px;
+}
+
+@media (max-width: 767px) {
+    .fc-toolbar button {
+        font-size: 12px;
+        padding: 5px 10px;
+    }
+}
+
+/* Taille du titre de la barre de navigation */
+.fc-toolbar-title {
+    font-size: 18px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+@media (max-width: 767px) {
+    .fc-toolbar-title {
+        font-size: 16px;
+    }
+}
+
+/* Margin pour le calendrier lui-même */
+#calendar {
+    margin-top: 20px;
+    width: 100%;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Pour les petits écrans, ajuster la largeur du calendrier */
+@media (max-width: 768px) {
+    #calendar {
+        max-width: 100%;
+    }
+}

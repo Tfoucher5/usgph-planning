@@ -1,0 +1,100 @@
+<?php
+
+namespace {{ namespace }};
+
+use {{ namespacedModel }};
+use Auth;
+use DB;
+use Log;
+
+class {{ model }}Repository
+{
+    /**
+     * @var {{ model }}
+     */
+    protected ${{ modelVariable }};
+
+    /**
+     * Constructor
+     * @param  {{ model }}  ${{ modelVariable }}
+     */
+    public function __construct({{ model }} ${{ modelVariable }})
+    {
+        $this->{{ modelVariable }} = ${{ modelVariable }};
+    }
+
+    /**
+     * Save the model instance
+     * @param  {{ model }}  ${{ modelVariable }}
+     * @return  {{ model }}
+     */
+    private function save({{ model }} ${{ modelVariable }}, array $inputs): {{ model }}
+    {
+        ${{ modelVariable }}->field = $inputs['field'];
+        ${{ modelVariable }}->save();
+
+        return ${{ modelVariable }};
+    }
+
+    /**
+     * Store a new model instance
+     * @param  array<mixed>  $inputs
+     * @return  {{ model }}
+     */
+    public function store(array $inputs): {{ model }}
+    {
+        ${{ modelVariable }} = new $this->{{ modelVariable }};
+        ${{ modelVariable }}->user_id_creation = Auth::id();
+
+        $this->save(${{ modelVariable }}, $inputs);
+        return ${{ modelVariable }};
+    }
+
+    /**
+     * Update the model instance
+     * @param  {{ model }}  ${{ modelVariable }}
+     * @param  array<mixed>  $inputs
+     * @return  {{ model }}
+     */
+    public function update({{ model }} ${{ modelVariable }}, array $inputs): {{ model }}
+    {
+        ${{ modelVariable }}->user_id_modification = Auth::id();
+
+        $this->save(${{ modelVariable }}, $inputs);
+        return ${{ modelVariable }};
+    }
+
+    /**
+     * Delete the model instance
+     * @param  {{ model }}  ${{ modelVariable }}
+     * @return bool|null
+     */
+    public function destroy({{ model }} ${{ modelVariable }})
+    {
+        ${{ modelVariable }}->user_id_suppression = Auth::id();
+        ${{ modelVariable }}->save();
+
+        return ${{ modelVariable }}->delete();
+    }
+
+    /**
+     * Undelete the model instance
+     * @param  {{ model }}  ${{ modelVariable }}
+     * @return void
+     */
+    public function undelete({{ model }} ${{ modelVariable }})
+    {
+        ${{ modelVariable }}->restore();
+    }
+
+    /**
+     * Return a JSON for index datatable
+     * @return string|false|void — a JSON encoded string on success or FALSE on failure
+     */
+    public function json()
+    {
+        return json_encode(
+            {{ model }}::all()
+        );
+    }
+}

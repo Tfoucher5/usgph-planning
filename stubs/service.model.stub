@@ -1,0 +1,96 @@
+<?php
+
+namespace {{ namespace }};
+
+use App\Http\Repositories\module\{{ model }}Repository;;
+use {{ namespacedModel }};
+use Auth;
+use DB;
+use Log;
+
+class {{ model }}Service
+{
+    /**
+     * @var {{ model }}Repository
+     */
+    protected $repository;
+
+    /**
+     * Constructor
+     * @param  {{ model }}Repository  $repository
+     */
+    public function __construct({{ model }}Repository $repository)
+    {
+        $this->repository = $repository;
+    }
+
+    /**
+     * Store a new model instance
+     * @param  array<mixed>  $inputs
+     * @return  {{ model }}
+     */
+    public function store(array $inputs): {{ model }}
+    {
+        //
+        // Règles de gestion à appliquer avant l'enregistrement en base
+        //
+
+        return $this->repository->store($inputs);
+    }
+
+    /**
+     * Update the model instance
+     * @param  {{ model }}  ${{ modelVariable }}
+     * @param  array<mixed>  $inputs
+     * @return  {{ model }}
+     */
+    public function update({{ model }} ${{ modelVariable }}, array $inputs): {{ model }}
+    {
+        //
+        // Règles de gestion à appliquer avant l'enregistrement en base
+        //
+
+        return $this->repository->update(${{ modelVariable }}, $inputs);
+    }
+
+    /**
+     * Delete the model instance
+     * @param  {{ model }}  ${{ modelVariable }}
+     * @return bool|null
+     */
+    public function destroy({{ model }} ${{ modelVariable }})
+    {
+        //
+        // Règles de gestion à appliquer avant l'enregistrement en base
+        //
+
+        return $this->repository->destroy(${{ modelVariable }});
+    }
+
+    /**
+     * Undelete the model instance
+     * @param  {{ model }}  ${{ modelVariable }}
+     * @return void
+     */
+    public function undelete({{ model }} ${{ modelVariable }})
+    {
+        //
+        // Règles de gestion à appliquer avant l'enregistrement en base
+        //
+
+        $this->repository->undelete(${{ modelVariable }});
+    }
+
+    /**
+     * Return a JSON for index datatable
+     * @return string|false|void — a JSON encoded string on success or FALSE on failure
+     */
+    public function json()
+    {
+        //
+        // Règles de gestion à appliquer avant l'enregistrement en base
+        //
+
+        return $this->repository->json();
+    }
+}

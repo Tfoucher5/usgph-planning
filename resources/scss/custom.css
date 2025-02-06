@@ -1,0 +1,230 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap');
+
+:root {}
+
+body {
+    font-family: 'Montserrat', sans-serif !important;
+    font-weight: 400;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6 {
+    font-weight: 600;
+}
+
+body {
+    background-color: var(--bs-light);
+}
+
+label.required:after {
+    position: initial !important;
+    content: " *" !important;
+    background-color: unset !important;
+}
+
+a {
+    color: var(--bs-primary);
+    text-decoration: none !important;
+}
+
+a[target=_blank]:not(.no-blank-icon):hover:after {
+    font-family: 'Font Awesome 6 Pro';
+    content: " \f08e";
+    font-size: 0.5rem;
+    vertical-align: super;
+}
+
+.content {
+    margin-top: 40px;
+    min-height: 100vh;
+}
+
+td {
+    vertical-align: middle;
+}
+
+.vh-50 {
+    height: 50vh !important;
+}
+
+.vh-90 {
+    height: 90vh !important;
+}
+
+.rotate-45 {
+    rotate: 45deg;
+}
+
+.rotate-90 {
+    rotate: 90deg;
+}
+
+.rotate-180 {
+    rotate: 180deg;
+}
+
+.rotate-270 {
+    rotate: 270deg;
+}
+
+a .logo {
+    max-height: 50px;
+}
+
+li.breadcrumb-item:not(.active) a {
+    color: var(--bs-secondary-color);
+}
+
+/************************
+ * login
+ ***********************/
+.bg-login {
+    background-size: cover;
+    background-image: url(../../login-background.jpg)
+}
+
+/************************
+ * password
+ ***********************/
+span.password-icon {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: all 0.2s;
+}
+
+span.password-icon:hover {
+    cursor: pointer;
+    color: var(--bs-danger);
+}
+
+span.password-icon .fa-eye-slash {
+    display: none;
+}
+
+/************************
+ * sidebar
+ ***********************/
+.sidebar-menu {
+    position: relative;
+    background: #f8f9fa;
+    box-shadow: inset 4px -2px 0.25rem 0px rgba(0, 0, 0, 0.075);
+    font-size: 0.7875rem;
+}
+
+.sidebar-link {
+    display: flex;
+    padding: 0.5rem 1.5rem;
+    transition: background 0.3s;
+    text-decoration: none;
+    align-items: center;
+}
+
+.sidebar-link[data-bs-toggle="collapse"] {
+    position: relative;
+}
+
+.sidebar-link[data-bs-toggle="collapse"]::before {
+    display: block;
+    position: absolute;
+    top: 50%;
+    right: 1rem;
+    content: '\f104';
+    transform: translateY(-50%);
+    color: #aaa;
+    font-family: 'Font Awesome 6 Pro';
+    font-weight: 900;
+}
+
+.sidebar-link[data-bs-toggle="collapse"][aria-expanded='true']::before {
+    content: '\f107';
+}
+
+.sidebar-link:hover {
+    text-decoration: none;
+    background: rgba(0, 0, 0, 0.03);
+}
+
+.sidebar-link.active,
+.sidebar-link:focus {
+    text-decoration: none;
+    color: #fff !important;
+    background: var(--bs-primary);
+}
+
+.sidebar-link.active::before,
+.sidebar-link:focus::before {
+    color: #fff;
+}
+
+.sidebar-link:focus {
+    background: var(--bs-primary);
+}
+
+.sidebar-link .sidebar-link-title {
+    display: inline-block;
+    transition: all 0.3s;
+}
+
+.sidebar-menu .sidebar-link.active {
+    background: var(--bs-primary);
+}
+
+/********************************
+ * synthese
+ *******************************/
+.card-salarie {
+    width: 425px;
+}
+
+.synthese-date {
+    width: 200px;
+}
+
+.bg-ferie {
+    background-color: rgba(220, 53, 70, 0.806) !important;
+}
+
+.bg-repos {
+    background-color: rgba(82, 82, 82, 0.824) !important;
+}
+
+.bg-absence-congé-annuel {
+    background-color: rgba(0, 195, 255, 0.824) !important;
+}
+
+.bg-absence-repos-compensateur {
+    background-color: rgba(167, 173, 0, 0.824) !important;
+}
+.bg-absence-congé-exceptionnel {
+    background-color: rgba(173, 118, 0, 0.824) !important;
+}
+.bg-absence-congé-maladie {
+    background-color: rgba(0, 158, 29, 0.824) !important;
+}
+
+/********************************
+ * absence tableau
+ *******************************/
+
+ .hachure {
+    background: repeating-linear-gradient(
+        45deg,
+        rgba(0, 0, 0, 0.1) 0px,
+        rgba(0, 0, 0, 0.1) 5px,
+        transparent 5px,
+        transparent 10px
+    );
+    background-size: 10px 10px;
+}
