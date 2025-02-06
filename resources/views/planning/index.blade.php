@@ -5,8 +5,8 @@
         <div id="no-data-for-user"></div>
 
         <script>
-            function changeSalarie(salarieId) {
-                window.location.href = `/planning/salarie/${salarieId}`;
+            function changeSalarie(salarie_id) {
+                window.location.href = `/planning/salarie/${salarie_id}`;
             }
         </script>
 
@@ -67,17 +67,6 @@
                         <x-inputs.input-select2 property="salarie_id" name="salarie_id" :entity="(object) ['salarie_id' => $currentUserId ?? null]"
                             label="salariés :" :values="$salaries" itemValue="id" itemLabel="identity"
                             :required="false" />
-                        {{-- <select name="salarie_id" id="salarie" class="form-select"
-                            onchange="changeSalarie(this.value)" style="max-width: 250px; flex: 1;">
-                            <option value="" disabled {{ !isset($user) ? 'selected' : '' }}>-- Sélectionner un
-                                salarié --</option>
-                            @foreach ($salaries as $salarie)
-                                <option value="{{ $salarie->id }}"
-                                    {{ isset($user) && $salarie->id == $user->id ? 'selected' : '' }}>
-                                    {{ $salarie->identity }}
-                                </option>
-                            @endforeach
-                        </select> --}}
                     </div>
                 @else
                     <p class="text-muted text-center">Aucun salarié disponible.</p>
@@ -532,7 +521,7 @@
                 var dayOfWeek = (clickedDate.getDay() === 0) ? 7 : clickedDate.getDay();
 
                 if (isAdmin) {
-                    var userId = document.getElementById('salarie').value;
+                    var userId = document.getElementById('salarie_id').value;
                 } else {
                     var userId = @json(auth()->user()->id)
                 }

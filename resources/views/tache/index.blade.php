@@ -6,7 +6,7 @@
         </div>
 
         <script>
-            function changeSalarie(salarieId) {
+            function changeSalarie(salarie_id) {
                 window.location.href = `/tache/salarie/${salarie_id}`;
             }
         </script>
